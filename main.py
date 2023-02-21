@@ -6,7 +6,7 @@ from kivy.properties import NumericProperty
 from player import *
 from kivy.clock import *
 
-Window.size = (800,400)
+Window.size = (1200,400)
 
 class GamePlay(Screen):
     ps = NumericProperty(77)
