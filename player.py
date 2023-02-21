@@ -3,7 +3,7 @@ from kivy.properties import StringProperty, NumericProperty, ReferenceListProper
 from kivy.vector import Vector
 
 class Player(Widget):
-    pac_img = StringProperty('images/pac_right.gif')
+    pac_img = StringProperty('images/pacRight.gif')
 
     velocity_x = NumericProperty(0)
     velocity_y = NumericProperty(0)
