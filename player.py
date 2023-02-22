@@ -65,3 +65,9 @@ class Player(Widget):
                    (passage[1] - 0.1 <= self.elan[1] + self.pos[1]) and \
                    (passage[3] + 0.1 >= self.elan[1] + self.pos[1]):
                     self.pos = Vector(*self.elan)+self.pos
+
+        if self.pos == [bpoint[5][0], (bpoint[5][1])]:
+            self.pos = [bpoint[8][0], (bpoint[8][1])]
+
+        elif self.pos == [bpoint[8][0], (bpoint[8][1])]:
+            self.pos = [bpoint[5][0], (bpoint[5][1])]
