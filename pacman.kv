@@ -4,7 +4,7 @@
 <Wall>:
 	canvas:
 		Color:
-			rgb: (0, 0, 255)
+		    rgb: (0, 0, 255)
 		Rectangle:
 			size: self.size
 			pos: self.pos
@@ -15,6 +15,13 @@
         source: root.pac_img
         pos: root.pos
         size: ps, ps
+
+<Ghost>:
+    Image:
+        id: 'ghost'
+        source: root.sp
+        pos: root.pos
+        size: ps,ps
 
 <Pointed>:
     canvas:
@@ -34,7 +41,7 @@
 			pos: self.pos
 
     pacman: pacman_player
-    
+
 	Wall:
 		size_hint: root.ps/root.ww, 1/100
 		x: 0
@@ -134,7 +141,7 @@
         size_hint: root.ps/root.ww + 2/100, 1/100
         x: 9*root.ps + 0.06*root.width
         y: 2*root.ps + 36 + root.height/100
-        
+
     Wall:
         size_hint: root.ps/root.ww + 2/100, 1/100
         x: 9*root.ps + 0.06*root.width
@@ -208,3 +215,14 @@
     Player:
         id: pacman_player
         pos: ps + root.width/100, root.height/100 + 36
+
+    Ghost:
+        id: ghost_1
+        # Lets position our ghost
+        pos: 9*ps + 0.07*root.width, ps + 0.02*root.height + 36
+        
+    Ghost:
+        id: ghost_2
+        # Lets position our ghost
+        pos: 9*ps + 0.07*root.width, ps + 0.02*root.height + 36
+        

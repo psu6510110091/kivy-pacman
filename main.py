@@ -4,17 +4,18 @@ from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty
 from player import *
+from ghost import *
 from kivy.clock import Clock
 
 Window.size = (1200,400)
 
 class GamePlay(Screen):
-
     ps = NumericProperty(77)
     ww = NumericProperty(1200)
     wh = NumericProperty(400)
 
     pacman = Player()
+    ghost1 = Ghost()
 
     def __init__(self, **kwargs):
         super(GamePlay,self).__init__(**kwargs)
@@ -34,12 +35,12 @@ class GamePlay(Screen):
             self.pacman.velocity=(-1,0)
         elif keycode[1] == 'right':
             self.pacman.velocity=(1,0)
+            print('hello')
             
         return True
-    
     def update(self, dt):
         self.pacman.move()
- 
+        
 class Wall(Widget):
     pass
 
