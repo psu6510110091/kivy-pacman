@@ -17,6 +17,8 @@ class GamePlay(Screen):
 
     pacman = Player()
     ghost1 = Ghost()
+    
+    food_point = ['point{0}'.format(i) for i in range(0,len(food))]
 
     def __init__(self, **kwargs):
         super(GamePlay,self).__init__(**kwargs)
@@ -41,7 +43,10 @@ class GamePlay(Screen):
         return True
     
     def show_food(self):
-        print('show food')
+        for i in range(0, len(food)):
+            if i !=179 and 1 != 170:
+                globals()[self.food_point[i]] = Points(pos=food[i], size = (5,5 ))
+                self.add_widget(globals()[self.food_point[i]])
     
     def update(self, dt):
         self.pacman.move()
