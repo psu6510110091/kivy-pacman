@@ -5,6 +5,7 @@ from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty
 from player import *
 from ghost import *
+from food import *
 from kivy.clock import Clock
 
 Window.size = (1200,400)
@@ -38,6 +39,10 @@ class GamePlay(Screen):
             print('hello')
             
         return True
+    
+    def show_food(self):
+        print('show food')
+    
     def update(self, dt):
         self.pacman.move()
         
@@ -47,6 +52,7 @@ class Wall(Widget):
 class PacmanApp(App):
     def build(self):
         game = GamePlay()
+        game.show_food()
         Clock.schedule_interval(game.update, 1.0 / 60.0)
         return game
 
