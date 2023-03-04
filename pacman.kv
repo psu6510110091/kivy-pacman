@@ -4,7 +4,7 @@
 <Wall>:
 	canvas:
 		Color:
-		    rgb: (0, 0, 255)
+			rgba: 0.2,0.1,0.9,1
 		Rectangle:
 			size: self.size
 			pos: self.pos
@@ -14,7 +14,7 @@
         id:'pacman'
         source: root.pac_img
         pos: root.pos
-        size: ps, ps
+        size: ps,ps
 
 <Ghost>:
     Image:
@@ -27,8 +27,10 @@
     canvas:
         Rectangle:
             pos: self.pos
-            size: 5.5
+            size: 5,5
 
+
+# Now we will add ghost class into Gameplay :)
 <GamePlay>:
 	canvas:
 		Rectangle:
@@ -37,6 +39,16 @@
 			pos: self.pos
 
     pacman: pacman_player
+
+    ghost: ghost_1
+    ghost: ghost_2
+
+    # this is our score label
+    Label:
+        font_size: 55
+        pos: 215,40
+        text: str(root.pacman.score)
+
 
 	Wall:
 		size_hint: root.ps/root.ww, 1/100
@@ -79,137 +91,125 @@
         y:(3*root.ps + 0.04*root.wh)/2 + 36 + root.ps
 
     Wall:
-        size_hint: 1 - 2*root.ps/root.ww, 1/100
+        size_hint: 1 - 2*root.ps/root.ww, 0.01
         x: root.ps
         y: 36
 
     Wall:
-        size_hint: 1 - 2*root.ps/root.ww, 1/100
+        size_hint: 1 - 2*root.ps/root.ww, 0.01
         x: root.ps
         y: 0.99*root.wh -36
 
     Wall:
-        size_hint: root.ps/root.ww + 1/100, 1/100
+        size_hint: root.ps/root.ww + 0.01, 0.01
         x: 2*root.ps + root.width/100
         y: root.ps + 36 + root.height/100
 
     Wall:
-        size_hint: root.ps/root.ww+ 1/100, 1/100
+        size_hint: root.ps/root.ww + 1/100, 0.01
+        x: 2*root.ps + root.width/100
+        y: 2*root.ps + 36 + 2*root.height/100
+
+    Wall:
+        size_hint: root.ps/root.ww+ 1/100, 0.01
         x: 2*root.ps + root.width/100
         y: 3*root.ps + 36 + 3*root.height/100
 
     Wall:
-        size_hint: 2*root.ps/root.ww + 2/100, 1/100
+        size_hint: 2*root.ps/root.ww + 2/100, 0.01
         x: 4*root.ps + 0.02*root.width
         y: 3*root.ps + 36 + 0.03*root.height
 
     Wall:
-        size_hint: root.ps/root.ww + 2/100, 1/100
-        x: 4*root.ps + 0.02*root.width
-        y: 2*root.ps + 36 + root.height/100
-
-    Wall:
-        size_hint: 2*root.ps/root.ww + 2/100, 1/100
+        size_hint: 2*root.ps/root.ww + 2/100, 0.01
         x: 4*root.ps + 0.02*root.width
         y: root.ps + 36 + root.height/100
 
     Wall:
-        size_hint: 2*root.ps/root.ww + 2/100, 1/100
-        x: 6*root.ps + 0.04*root.width
-        y: root.ps + 36 + root.height/100
-
-    Wall:
-        size_hint: 2*root.ps/root.ww + 2/100, 1/100
-        x: 6*root.ps + 0.04*root.width
-        y: 2*root.ps + 36 + root.height/100
-
-    Wall:
-        size_hint: 2*root.ps/root.ww + 2/100, 1/100
-        x: 6*root.ps + 0.04*root.width
+        size_hint: root.ps/root.ww + 2/100, 0.01
+        x: 7*root.ps + 0.04*root.width
         y: 3*root.ps + 36 + 0.03*root.height
 
     Wall:
-        size_hint: root.ps/root.ww + 2/100, 1/100
-        x: 9*root.ps + 0.06*root.width
-        y: 3*root.ps + 36 + 0.03*root.height
+        size_hint: root.ps/root.ww + 0.02, 0.01
+        x: 7*root.ps + 0.04*root.width
+        y: 2*root.ps + 36 + 0.02*root.height
 
     Wall:
-        size_hint: root.ps/root.ww + 2/100, 1/100
-        x: 9*root.ps + 0.06*root.width
-        y: 2*root.ps + 36 + root.height/100
-
-    Wall:
-        size_hint: root.ps/root.ww + 2/100, 1/100
-        x: 9*root.ps + 0.06*root.width
-        y: root.ps + 36 + root.height/100
-
-    Wall:
-        size_hint: root.ps/root.ww + 1/100, 1/100
-        x: 11*root.ps + 0.08*root.width
-        y: 3*root.ps + 36 + 0.03*root.height
-
-    Wall:
-        size_hint: root.ps/root.ww + 1/100, 1/100
-        x: 11*root.ps + 0.08*root.width
-        y: root.ps + 36 + root.height/100
-
-    Wall:
-        size_hint: 0.01, 2*root.ps/root.wh + 3/100
-        x: 3*root.ps + root.width/100
-        y: root.ps + 36 + root.height/100
-
-    Wall:
-        size_hint: 0.01, 2*root.ps/root.wh + 3/100
-        x: 2*root.ps + root.width/100
-        y: root.ps + 36 + root.height/100
-
-    Wall:
-        size_hint: 0.01, 2*root.ps/root.wh + 2/100
-        x: 4*root.ps + 0.02*root.width
-        y: root.ps + 36 + 0.02*root.height
-
-    Wall:
-        size_hint: 0.01, 2*root.ps/root.wh + 2/100
-        x: 5*root.ps + 0.03*root.width
-        y: root.ps + 36 + 0.02*root.height
-
-    Wall:
-        size_hint: 0.01, root.ps/root.wh
+        size_hint: root.ps/root.ww + 0.02, 0.01
         x: 7*root.ps + 0.04*root.width
         y: root.ps + 36 + root.height/100
 
     Wall:
-        size_hint: 0.01, 2*root.ps/root.wh + 3/100
-        x: 8*root.ps + 0.05*root.width
-        y: root.ps + 36 + root.height/100
-
-    Wall:
-        size_hint: 0.01, 2*root.ps/root.wh + 2/100
+        size_hint: root.ps/root.ww + 0.02, 0.01
         x: 9*root.ps + 0.06*root.width
-        y: root.ps + 36 + root.height/100
+        y: 3*root.ps + 36 + 0.03*root.height
 
     Wall:
-        size_hint: 0.01, 2*root.ps/root.wh + 3/100
-        x: 6*root.ps + 0.03*root.width
-        y: root.ps + 36 + root.height/100
+        size_hint: root.ps/root.ww + 0.02, 0.01
+        x: 9*root.ps + 0.06*root.width
+        y: 2*root.ps + 36 + 0.02*root.height
 
     Wall:
-        size_hint: 0.01, 2*root.ps/root.wh + 2/100
-        x: 10*root.ps + 0.07*root.width
-        y: root.ps + 36 + root.height/100
+        size_hint: root.ps/root.ww + 0.01, 0.01
+        x: 11*root.ps + 0.08*root.width
+        y: 3*root.ps + 36 + 0.03*root.height
+
 
     Wall:
-        size_hint: 0.01, 2*root.ps/root.wh + 3/100
+        size_hint: root.ps/root.ww + 0.01, 0.01
+        x: 11*root.ps + 0.08*root.width
+        y: 2*root.ps + 36 + 0.02*root.height
+
+    Wall:
+        size_hint: root.ps/root.ww + 0.01, 0.01
+        id: m13
         x: 11*root.ps + 0.08*root.width
         y: root.ps + 36 + root.height/100
 
     Wall:
-        size_hint: 0.01, 2*root.ps/root.wh + 3/100
-        x: 12*root.ps + 0.08*root.width
+        size_hint: 0.01, 2*root.ps/root.wh + 0.03
+        x: 2*root.ps + root.width/100
+        y: root.ps + 36 + root.height/100
+
+    Wall:
+        size_hint: 0.01, 2*root.ps/root.wh + 0.03
+        x: 4*root.ps + 0.02*root.width
+        y: root.ps + 36 + root.height/100
+
+    Wall:
+        size_hint: 0.01, 2*root.ps/root.wh + 0.03
+        x: 6*root.ps + 0.03*root.width
+        y: root.ps + 36 + root.height/100
+
+    Wall:
+        size_hint: 0.01, root.ps/root.wh + 0.02
+        x: 7*root.ps + 0.04*root.width
+        y: 2*root.ps + 36 + 0.02*root.height
+
+    Wall:
+        size_hint: 0.01, root.ps/root.wh + 0.02
+        x: 8*root.ps + 0.05*root.width
+        y: root.ps + 36 + root.height/100
+
+    Wall:
+        size_hint: 0.01, 2*root.ps/root.wh + 0.03
+        x: 9*root.ps + 0.06*root.width
+        y: root.ps + 36 + root.height/100
+
+    Wall:
+        size_hint: 0.01, 2*root.ps/root.wh + 0.03
+        x: 10*root.ps + 0.07*root.width
+        y: root.ps + 36 + root.height/100
+
+    Wall:
+        size_hint: 0.01, 2*root.ps/root.wh + 0.03
+        x: 11*root.ps + 0.08*root.width
         y: root.ps + 36 + root.height/100
 
     Player:
         id: pacman_player
+        # Lets fix our player pos
         pos: ps + root.width/100, root.height/100 + 36
 
     Ghost:
@@ -221,4 +221,3 @@
         id: ghost_2
         # Lets position our ghost
         pos: 9*ps + 0.07*root.width, ps + 0.02*root.height + 36
-        
