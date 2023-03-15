@@ -1,14 +1,14 @@
 #:set ps 77
+#:import Powerball powerball.Powerball
 
 # Wall class
 <Wall>:
 	canvas:
 		Color:
-			rgba: 0.2,0.1,0.9,1
+			rgb: (0, 0, 255)
 		Rectangle:
 			size: self.size
 			pos: self.pos
-
 <Player>:
     Image:
         id:'pacman'
@@ -29,38 +29,39 @@
             pos: self.pos
             size: 5,5
 
+<Powerball>:
+    Image:
+        source: root.ima
+        pos: root.pos
+        size: 20,20
 
-# Now we will add ghost class into Gameplay :)
 <GamePlay>:
-	canvas:
-		Rectangle:
-			source: 'images/bg.png'
-			size: self.size
-			pos: self.pos
+    canvas:
+        Rectangle:
+            source: 'images/bg.png'
+            size: self.size
+            pos: self.pos
 
-    pacman: pacman_player
+	pacman: pacman_player
 
-    ghost: ghost_1
-    ghost: ghost_2
+    ghost1: ghost_1
+    ghost2: ghost_2
+    powerball: powerball_1
 
-    # this is our score label
     Label:
         font_size: 55
         pos: 215,40
         text: str(root.pacman.score)
-
-
-	Wall:
-		size_hint: root.ps/root.ww, 1/100
-		x: 0
-		y: (3*root.ps + 0.04*root.wh)/2+36 - root.wh/100
-
-	Wall:
-        size_hint: root.ps/root.ww , 1/100
+    
+    Wall:
+        size_hint: root.ps/root.ww, 1/100
+        x: 0
+        y: (3*root.ps + 0.04*root.wh)/2+36 - root.wh/100
+    Wall:
+        size_hint: root.ps/root.ww, 1/100
         x: 0
         y: (3*root.ps + 0.04*root.wh)/2 + 36  + root.ps
-
-    Wall:
+	Wall:
         size_hint: root.ps/root.ww , 1/100
         x: root.ww -root.ps
         y:(3*root.ps + 0.04*root.wh)/2 + 36 - root.wh/100
@@ -206,18 +207,21 @@
         size_hint: 0.01, 2*root.ps/root.wh + 0.03
         x: 11*root.ps + 0.08*root.width
         y: root.ps + 36 + root.height/100
-
-    Player:
+	
+	Player:
         id: pacman_player
-        # Lets fix our player pos
         pos: ps + root.width/100, root.height/100 + 36
-
+	
     Ghost:
         id: ghost_1
-        # Lets position our ghost
         pos: 9*ps + 0.07*root.width, ps + 0.02*root.height + 36
         
     Ghost:
         id: ghost_2
-        # Lets position our ghost
         pos: 9*ps + 0.07*root.width, ps + 0.02*root.height + 36
+    
+
+    Powerball:
+        id: powerball_1
+        x: 7*ps + 0.05*root.width+15
+        y: 2*ps + 36 + 0.03*root.height + 30

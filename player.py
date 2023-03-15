@@ -1,7 +1,7 @@
 from kivy.uix.widget import Widget
 from kivy.properties import StringProperty, NumericProperty, ReferenceListProperty
 from kivy.vector import Vector
-from Dijkstra import pts_graph, distance, argmin
+from Dijkstra import pts_graph, distance, armin
 
 close_list = [[28,5],[11,22],[28,6],[12,24], \
               [1,7,17],[3,8,16],[5,9,17],[6,10,17], \
@@ -73,6 +73,8 @@ class Player(Widget):
 
     close_point = 1
     
+    powerup =0
+    
     def move(self):
 
         last_pos = self.pos.copy()
@@ -110,4 +112,4 @@ class Player(Widget):
             self.pos = [bpoint[27][0], (bpoint[27][1])]
 
         self.close_point = \
-            argmin(lambda x:distance(self.pos, bpoint[x]),close_list[self.close_point -1], self.close_point)
+            armin(lambda x:distance(self.pos, bpoint[x]),close_list[self.close_point -1], self.close_point)

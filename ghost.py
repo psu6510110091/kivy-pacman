@@ -1,11 +1,11 @@
 from kivy.uix.widget import Widget
-from kivy.properties import StringProperty, NumericProperty, ReferenceListProperty
+from kivy.properties import StringProperty,NumericProperty,ReferenceListProperty
 from kivy.vector import Vector
 from random import randint
 from math import *
 from food import *
 from player import passages, bpoint, graph, close_list
-from Dijkstra import dijklstra, distance, argmin
+from Dijkstra import dijkstra, distance, armin
 
 class Ghost(Widget):
     sp = StringProperty('images/ghost_1.png')
@@ -23,7 +23,7 @@ class Ghost(Widget):
     def move(self, randomly=True):
 
         last_pos = self.pos.copy()
-        
+
         for passage in passages:
             if (passage[0] <= self.velocity_x + self.pos[0]) and \
                (passage[2] >= self.velocity_x + self.pos[0]) and \
@@ -37,6 +37,10 @@ class Ghost(Widget):
                     self.sp = "images/ghost_1.png"
 
                 if self.velocity == [1, 0]:
+                    self.sp = "images/ghost_1.png"
+                if self.velocity == [0, 1]:
+                    self.sp = "images/ghost_1.png"
+                if self.velocity == [0, -1]:
                     self.sp = "images/ghost_1.png"
 
         if self.pos == last_pos:
@@ -59,7 +63,7 @@ class Ghost(Widget):
                self.move()
 
         self.close_point = \
-            argmin(lambda x:distance(self.pos, bpoint[x]),close_list[self.close_point -1], self.close_point)
+            armin(lambda x:distance(self.pos, bpoint[x]),close_list[self.close_point -1], self.close_point)
 
     def direction(self):
         dep = randint(0,3)
@@ -78,16 +82,16 @@ class Ghost(Widget):
                 self.strat = (self.strat[0], self.strat[1][1::])
 
             if (bpoint[self.strat[1][0]][1] - self.pos[1]) != 0:
-                self.velocity = [0, (bpoint[self.strat[1][0]][1] - self.pos[1] ) / abs(bpoint[self.strat[1][0]][1] - self.pos[1])]
-
+                self.velocity = [0,(bpoint[self.strat[1][0]][1] - self.pos[1]) / abs(bpoint[self.strat[1][0]][1] - self.pos[1])]
             if (bpoint[self.strat[1][0]][0] - self.pos[0]) != 0:
-                self.velocity = [(bpoint[self.strat[1][0]][0] - self.pos[0] ) / abs(bpoint[self.strat[1][0]][0] - self.pos[0]),0]
+                self.velocity = [(bpoint[self.strat[1][0]][0] - self.pos[0]) / abs(bpoint[self.strat[1][0]][0] - self.pos[0]), 0]
+                
             self.move(False)
         except:
             self.move()
 
     def next_strategy(self, close_to_player):
-        self.strat = dijklstra(self.close_point, close_to_player, graph)
+        self.strat = dijkstra(self.close_point, close_to_player, graph)
 
     def next_strategy2(self, close_to_player):
-        self.strat = dijklstra(self.close_point, close_to_player, graph)
+        self.strat = dijkstra(self.close_point, close_to_player, graph)
